@@ -1,0 +1,24 @@
+package org.cubicdev.plugin.amazingJoin.actions.types;
+
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.cubicdev.plugin.amazingJoin.AmazingJoin;
+import org.cubicdev.plugin.amazingJoin.actions.Action;
+
+public class SoundAction extends Action {
+    //This action sends a sound to the target player.
+    public SoundAction(AmazingJoin main) {
+        super(main, "sound");
+    }
+
+    @Override
+    public void execute(Player player, String args) {
+        String[] parameters = args.split(";");
+
+        String soundName = parameters[0];
+        float volume = Float.parseFloat(parameters[1]);
+        float pitch = Float.parseFloat(parameters[2]);
+
+        player.playSound(player.getLocation(), Sound.valueOf(soundName), volume, pitch);
+    }
+}

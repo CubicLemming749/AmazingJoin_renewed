@@ -1,0 +1,11 @@
+formats:
+  owner:
+    permission: ajoin.owner
+    join-actions:
+      - "message;<red>Hello, Owner!"
+      - "sound;BLOCK_NOTE_BLOCK_PLING;1;1"
+      - "title;<color:#FA7C64><b>WELCOME TO THE SERVER!;none;20;20;20"
+      - "player;hello"
+      - "condition;%player_name%=CubicLemming749;message;<yellow><b>YOU'RE CUBICLEMMING749!"
+    leave-actions:
+      - "message;<red>test"

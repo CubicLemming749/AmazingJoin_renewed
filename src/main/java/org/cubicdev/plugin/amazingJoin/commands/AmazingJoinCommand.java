@@ -40,9 +40,9 @@ public class AmazingJoinCommand {
 
     public void setupCommand(){
         LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("amazingjoin")
-                .requires(executor -> executor.getExecutor().hasPermission("amazingjoin.command"))
+                .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command"))
                 .then(Commands.literal("create").
-                        requires(executor -> executor.getExecutor().hasPermission("amazingjoin.command.create")).
+                        requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.create")).
                         then(Commands.argument("name", StringArgumentType.word()).
                                 then(Commands.argument("permission", StringArgumentType.greedyString())
                                         .executes(ctx -> {
@@ -62,7 +62,7 @@ public class AmazingJoinCommand {
                 )
 
                 .then(Commands.literal("test")
-                        .requires(executor -> executor.getExecutor().hasPermission("amazingjoin.command.test"))
+                        .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.test"))
                         .then(Commands.argument("format", StringArgumentType.word())
                                 .suggests(this::getSuggestions)
                                 .then(Commands.literal("join").
@@ -107,7 +107,7 @@ public class AmazingJoinCommand {
 
                 .then(Commands.literal("addaction")
                         .then(Commands.argument("format", StringArgumentType.word())
-                                .requires(executor -> executor.getExecutor().hasPermission("amazingjoin.command.addaction"))
+                                .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.addaction"))
                                 .suggests(this::getSuggestions)
                                 .then(Commands.argument("type", StringArgumentType.word())
                                         .suggests((commandContext, suggestionsBuilder) -> {
@@ -121,8 +121,23 @@ public class AmazingJoinCommand {
                                                 .executes(ctx -> addAction(ctx, ctx.getArgument("type", String.class))))))
                 )
 
+                .then(Commands.literal("help")
+                        .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.help"))
+                        .executes(commandContext -> {
+                            YamlConfiguration config = configsManager.findConfig("config.yml").getYamlConfiguration();
+                            CommandSender commandSender = commandContext.getSource().getSender();
+
+                            List<String> helpMessage = config.getStringList("config.language.help_message");
+
+                            helpMessage.forEach(message -> {
+                                Utils.sendParsedMessage(commandSender, message);
+                            });
+
+                            return Command.SINGLE_SUCCESS;
+                        })
+                )
                 .then(Commands.literal("reload")
-                        .requires(executor -> executor.getExecutor().hasPermission("amazingjoin.command.reload"))
+                        .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.reload"))
                         .executes(commandContext -> {
                             configsManager.reloadConfigs();
                             formatsManager.reloadFormats();
@@ -136,7 +151,7 @@ public class AmazingJoinCommand {
         LiteralCommandNode<CommandSourceStack> command = root.build();
 
         this.main.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
-            commands.registrar().register(command);
+            commands.registrar().register(command, List.of("aj", "ajoin"));
         });
     }
 

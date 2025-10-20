@@ -1,4 +1,4 @@
-package org.cubicdev.plugin.amazingJoin.actions.types;
+package org.cubicdev.plugin.amazingJoin.actions.types.broadcast;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 import org.cubicdev.plugin.amazingJoin.AmazingJoin;
 import org.cubicdev.plugin.amazingJoin.actions.Action;
 
-public class BroadcastAction extends Action {
+public class BroadcastMessageAction extends Action {
     //This action sends a message to all the server
-    public BroadcastAction(AmazingJoin main) {
+    public BroadcastMessageAction(AmazingJoin main) {
         super(main, "broadcast");
     }
 

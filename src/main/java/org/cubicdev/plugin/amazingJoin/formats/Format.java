@@ -3,14 +3,15 @@ package org.cubicdev.plugin.amazingJoin.formats;
 import org.cubicdev.plugin.amazingJoin.actions.Action;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Format {
     private String name;
     private String permission;
-    private HashMap<Action, String> joinActionsMap;
-    private HashMap<Action, String> leaveActionsMap;
+    private LinkedHashMap<Action, String> joinActionsMap;
+    private LinkedHashMap<Action, String> leaveActionsMap;
 
-    public Format(String name, String permission, HashMap<Action, String> joinActionsMap, HashMap<Action, String> leaveActionsMap){
+    public Format(String name, String permission, LinkedHashMap<Action, String> joinActionsMap, LinkedHashMap<Action, String> leaveActionsMap){
         this.name = name;
         this.permission = permission;
         this.joinActionsMap = joinActionsMap;
@@ -33,19 +34,19 @@ public class Format {
         this.permission = permission;
     }
 
-    public HashMap<Action, String> getJoinActionsMap() {
+    public LinkedHashMap<Action, String> getJoinActionsMap() {
         return joinActionsMap;
     }
 
-    public void setJoinActionsList(HashMap<Action, String> newJoinActionsMap) {
+    public void setJoinActionsList(LinkedHashMap<Action, String> newJoinActionsMap) {
         this.joinActionsMap = newJoinActionsMap;
     }
 
-    public HashMap<Action, String> getLeaveActionsMap() {
+    public LinkedHashMap<Action, String> getLeaveActionsMap() {
         return leaveActionsMap;
     }
 
-    public void setLeaveActionsList(HashMap<Action, String> newLeaveActionsMap) {
+    public void setLeaveActionsList(LinkedHashMap<Action, String> newLeaveActionsMap) {
         this.leaveActionsMap = newLeaveActionsMap;
     }
 }

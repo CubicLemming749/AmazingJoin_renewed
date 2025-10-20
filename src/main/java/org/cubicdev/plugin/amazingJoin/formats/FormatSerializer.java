@@ -8,10 +8,7 @@ import org.cubicdev.plugin.amazingJoin.actions.ActionSerializer;
 import org.cubicdev.plugin.amazingJoin.config.Config;
 import org.cubicdev.plugin.amazingJoin.managers.ConfigsManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class FormatSerializer {
     AmazingJoin main;
@@ -42,10 +39,10 @@ public class FormatSerializer {
             String permission = yamlConfiguration.
                     getString("formats."+formatName+".permission");
 
-            HashMap<Action, String> joinActions = actionSerializer.deserializeActions(yamlConfiguration.
+            LinkedHashMap<Action, String> joinActions = actionSerializer.deserializeActions(yamlConfiguration.
                     getStringList("formats."+formatName+".join-actions"));
 
-            HashMap<Action, String> leaveActions = actionSerializer.deserializeActions(yamlConfiguration.
+            LinkedHashMap<Action, String> leaveActions = actionSerializer.deserializeActions(yamlConfiguration.
                     getStringList("formats."+formatName+".leave-actions"));
 
             Format newFormat = new Format(formatName, permission, joinActions, leaveActions);

@@ -26,7 +26,7 @@ public class Config {
 
         yamlConfiguration = YamlConfiguration.loadConfiguration(file);
 
-        plugin.getLogger().info("Loading configuration file: "+name);
+        plugin.getLogger().warning("Loading configuration file: "+name);
     }
 
     public void saveConfig(){
@@ -34,8 +34,9 @@ public class Config {
 
         try {
             yamlConfiguration.save(file);
+            plugin.getLogger().warning("Saving configuration file: "+name);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            plugin.getLogger().warning("Failed to save configuration file into disk: "+name);
         }
     }
 

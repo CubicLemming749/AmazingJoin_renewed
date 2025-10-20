@@ -1,5 +1,8 @@
 config:
   debug: true
+  hooks:
+    authme: false
+    nlogin: false
   language:
     prefix: "<gray>[</gray><yellow>AmazingJoin<gray>]</gray>"
     reload_success: "<prefix> <green>AmazingJoin has successfully been reloaded."
@@ -9,3 +12,22 @@ config:
     format_created: "<prefix> <green>The format <name> created succesfully, you can now edit it in configuration or using <gold>/amazingjoin addaction."
     format_action_added: "<prefix> <green>Successfuly added the action to the format."
     format_testing_success: "<prefix> <green>Testing the format..."
+    help_message:
+      - ""
+      - "<prefix> <green>Showing help message:"
+      - ""
+      - "<dark_gray>• <color:#1BCC91>/amazingjoin create <name> <permission> <dark_gray>‣ <white>Creates a new format in config with the parameters specified."
+      - ""
+      - "<dark_gray>• <color:#1BCC91>/amazingjoin addaction <format_name> <join/leave> <action> <dark_gray>‣ <white>Writes a new action to the specified format configuration."
+      - ""
+      - "<dark_gray>• <color:#1BCC91>/amazingjoin test <format_name> <join/leave> <dark_gray>‣ <white>Tests the specified format with your own user."
+      - ""
+      - "<dark_gray>• <color:#1BCC91>/amazingjoin reload <dark_gray>‣ <white>Reloads the configuration."
+      - ""
+      - "<dark_gray>• <color:#1BCC91>/amazingjoin help <dark_gray>‣ <white>Shows this message."
+      - ""
+      - ""
+      - "<gray><italic>Need more help?"
+      - "<dark_gray>• <white>Wiki: <yellow>"
+      - "<dark_gray>• <white>Discord user: <yellow>elsus1719"
+      - ""

@@ -1,12 +1,11 @@
 package org.cubicdev.plugin.amazingJoin.actions;
 
 import org.cubicdev.plugin.amazingJoin.AmazingJoin;
-import org.cubicdev.plugin.amazingJoin.actions.types.*;
+import org.cubicdev.plugin.amazingJoin.actions.types.broadcast.*;
+import org.cubicdev.plugin.amazingJoin.actions.types.player.*;
+import org.cubicdev.plugin.amazingJoin.actions.types.other.ConditionAction;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ActionSerializer {
     AmazingJoin main;
@@ -15,11 +14,11 @@ public class ActionSerializer {
     }
 
 
-    public HashMap<Action, String> deserializeActions(List<String> actions){
-        HashMap<Action, String> temporal = new HashMap<>();
+    public LinkedHashMap<Action, String> deserializeActions(List<String> actions){
+        LinkedHashMap<Action, String> temporal = new LinkedHashMap<>();
 
         if(actions.isEmpty()){
-            return new HashMap<>();
+            return new LinkedHashMap<>();
         }
 
         for(String action : actions){
@@ -46,6 +45,18 @@ public class ActionSerializer {
                 return new MessageAction(main);
             }
 
+            case "centered_message" -> {
+                return new CenteredMessageAction(main);
+            }
+
+            case "title" -> {
+                return new TitleAction(main);
+            }
+
+            case "actionbar" -> {
+                return new ActionbarAction(main);
+            }
+
             case "sound" -> {
                 return new SoundAction(main);
             }
@@ -63,15 +74,23 @@ public class ActionSerializer {
             }
 
             case "broadcast" -> {
-                return new BroadcastAction(main);
+                return new BroadcastMessageAction(main);
             }
 
-            case "title" -> {
-                return new TitleAction(main);
+            case "broadcast_centered" -> {
+                return new BroadcastCenteredMessageAction(main);
             }
 
-            case "actionbar" -> {
-                return new ActionbarAction(main);
+            case "broadcast_sound" -> {
+                return new BroadcastSoundAction(main);
+            }
+
+            case "broadcast_title" -> {
+                return new BroadcastTitleAction(main);
+            }
+
+            case "broadcast_actionbar" -> {
+                return new BroadcastActionbarAction(main);
             }
 
             default -> {

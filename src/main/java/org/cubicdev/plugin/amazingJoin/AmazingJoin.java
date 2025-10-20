@@ -1,13 +1,15 @@
 package org.cubicdev.plugin.amazingJoin;
 
-import org.bstats.bukkit.Metrics;
-import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.cubicdev.plugin.amazingJoin.actions.ActionSerializer;
 import org.cubicdev.plugin.amazingJoin.commands.AmazingJoinCommand;
 import org.cubicdev.plugin.amazingJoin.config.Config;
 import org.cubicdev.plugin.amazingJoin.formats.FormatSerializer;
 import org.cubicdev.plugin.amazingJoin.listener.PlayerListener;
+import org.cubicdev.plugin.amazingJoin.listener.hooks.Authme;
+import org.cubicdev.plugin.amazingJoin.listener.hooks.nLogin;
 import org.cubicdev.plugin.amazingJoin.managers.ConfigsManager;
 import org.cubicdev.plugin.amazingJoin.managers.FormatsManager;
 import org.cubicdev.plugin.amazingJoin.utils.Utils;
@@ -66,9 +68,20 @@ public final class AmazingJoin extends JavaPlugin {
     }
 
     public void registerEvents(){
-        this.getServer().
-                getPluginManager().
-                registerEvents(new PlayerListener(formatsManager, configsManager), this);
+        PluginManager pm = getServer().getPluginManager();
+        YamlConfiguration configuration = configsManager.findConfig("config.yml").getYamlConfiguration();
+
+        if(pm.isPluginEnabled("AuthMe") && configuration.getBoolean("config.hooks.authme")){
+            pm.registerEvents(new Authme(formatsManager, configsManager), this);
+            return;
+        }
+
+        if(pm.isPluginEnabled("nLogin") && configuration.getBoolean("config.hooks.nlogin")){
+            pm.registerEvents(new nLogin(formatsManager, configsManager), this);
+            return;
+        }
+
+        pm.registerEvents(new PlayerListener(formatsManager, configsManager), this);
     }
 
     public void registerCommands(){

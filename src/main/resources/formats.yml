@@ -1,11 +1,11 @@
 formats:
-  owner:
-    permission: ajoin.owner
+  default:
+    permission: default
     join-actions:
-      - "message;<red>Hello, Owner!"
+      - "condition;%player_has_played_before%=yes;broadcast;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> <white>The user <color:#DEAE2F><player></color> joined the server."
+      - "condition;%player_has_played_before%=no;broadcast;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> <white>The user <color:#DEAE2F><player></color> joined the server for the first time! He is the <color:#DEAE2F>#%server_unique_joins%</color>."
+      - "message;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> Welcome to the server!"
       - "sound;BLOCK_NOTE_BLOCK_PLING;1;1"
-      - "title;<color:#FA7C64><b>WELCOME TO THE SERVER!;none;20;20;20"
-      - "player;hello"
-      - "condition;%player_name%=CubicLemming749;message;<yellow><b>YOU'RE CUBICLEMMING749!"
+      - "title;<color:#FA7C64><b>WELCOME TO;<gold><b>AMAZINGMC;20;20;20"
     leave-actions:
-      - "message;<red>test"
+      - "broadcast;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> <white>The user <color:#DEAE2F><player></color> left the server."

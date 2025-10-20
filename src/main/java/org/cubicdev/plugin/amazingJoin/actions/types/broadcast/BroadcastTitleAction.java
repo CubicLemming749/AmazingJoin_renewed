@@ -1,18 +1,18 @@
-package org.cubicdev.plugin.amazingJoin.actions.types;
+package org.cubicdev.plugin.amazingJoin.actions.types.broadcast;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.cubicdev.plugin.amazingJoin.AmazingJoin;
 import org.cubicdev.plugin.amazingJoin.actions.Action;
 
 import java.time.Duration;
 
-public class TitleAction extends Action {
-    //This action sends a title to the target player.
-    public TitleAction(AmazingJoin main) {
-        super(main, "title");
+public class BroadcastTitleAction extends Action {
+    public BroadcastTitleAction(AmazingJoin main) {
+        super(main, "broadcast_title");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TitleAction extends Action {
 
         Title finalTitleComponent = Title.title(titleComponent, subtitleComponent, times);
 
-        player.showTitle(finalTitleComponent);
+        Bukkit.getOnlinePlayers().forEach(capturedPlayer -> capturedPlayer.showTitle(finalTitleComponent));
         //Example: title;subtitle;20;20;20
     }
 }

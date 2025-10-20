@@ -3,8 +3,6 @@ package org.cubicdev.plugin.amazingJoin.actions.conditions;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-
 public class CustomConditions {
     String[] possibleOperators;
 
@@ -20,7 +18,7 @@ public class CustomConditions {
     public boolean checkConditions(Player player, String condition){
         /*
           Example of a condition: condition;%player_name%=CubicLemming749;message:<red>You're CubicLemming749!
-          The action(s) will be only triggered if the condition(s) in the statement is true.
+          The action(s) will be only triggered if the condition(s) in the statement is/are true.
         */
 
         if(!PlaceholderAPI.containsPlaceholders(condition)){

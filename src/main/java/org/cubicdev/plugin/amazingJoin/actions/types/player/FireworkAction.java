@@ -1,4 +1,4 @@
-package org.cubicdev.plugin.amazingJoin.actions.types;
+package org.cubicdev.plugin.amazingJoin.actions.types.player;
 
 import org.bukkit.entity.Player;
 import org.cubicdev.plugin.amazingJoin.AmazingJoin;

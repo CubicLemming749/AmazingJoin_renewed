@@ -3,7 +3,7 @@ package org.cubicdev.plugin.amazingJoin.managers;
 import org.bukkit.entity.Player;
 import org.cubicdev.plugin.amazingJoin.actions.Action;
 import org.cubicdev.plugin.amazingJoin.actions.ActionType;
-import org.cubicdev.plugin.amazingJoin.actions.types.ConditionAction;
+import org.cubicdev.plugin.amazingJoin.actions.types.other.ConditionAction;
 import org.cubicdev.plugin.amazingJoin.formats.Format;
 import org.cubicdev.plugin.amazingJoin.formats.FormatSerializer;
 import org.cubicdev.plugin.amazingJoin.utils.Utils;
@@ -28,6 +28,10 @@ public class FormatsManager {
 
         for(Format format : formats){
             if(player.hasPermission(format.getPermission())){
+                return format;
+            }
+
+            if(format.getPermission().equals("default")){
                 return format;
             }
         }

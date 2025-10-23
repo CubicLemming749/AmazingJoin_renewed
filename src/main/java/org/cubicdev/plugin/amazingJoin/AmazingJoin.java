@@ -47,6 +47,8 @@ public final class AmazingJoin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        getLogger().warning("The plugin has been disabled.");
+        getLogger().warning("Thanks for using it! :D");
         configsManager.saveConfigs();
     }
 

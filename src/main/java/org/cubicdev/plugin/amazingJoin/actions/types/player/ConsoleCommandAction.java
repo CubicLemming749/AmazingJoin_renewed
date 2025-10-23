@@ -1,5 +1,7 @@
 package org.cubicdev.plugin.amazingJoin.actions.types.player;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.cubicdev.plugin.amazingJoin.AmazingJoin;
@@ -13,6 +15,6 @@ public class ConsoleCommandAction extends Action {
 
     @Override
     public void execute(Player player, String args) {
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), args.replace("<player>", player.getName()));
+        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), PlaceholderAPI.setPlaceholders(player, args));
     }
 }

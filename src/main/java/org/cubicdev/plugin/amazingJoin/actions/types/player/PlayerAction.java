@@ -1,5 +1,6 @@
 package org.cubicdev.plugin.amazingJoin.actions.types.player;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;
 import org.cubicdev.plugin.amazingJoin.AmazingJoin;
 import org.cubicdev.plugin.amazingJoin.actions.Action;
@@ -14,11 +15,11 @@ public class PlayerAction extends Action {
     public void execute(Player player, String args) {
 
         if(args.startsWith("/")){
-            player.performCommand(args);
+            player.performCommand(PlaceholderAPI.setPlaceholders(player, args));
             return;
         }
 
-        player.chat(args);
+        player.chat(PlaceholderAPI.setPlaceholders(player, args));
 
     }
     //This makes the player to execute a command or chat a message.

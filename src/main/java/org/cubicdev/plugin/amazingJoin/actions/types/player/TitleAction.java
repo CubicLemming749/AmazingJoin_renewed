@@ -1,5 +1,6 @@
 package org.cubicdev.plugin.amazingJoin.actions.types.player;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
@@ -31,10 +32,10 @@ public class TitleAction extends Action {
         long fadeOut = Long.parseLong(parameters[4]) * 50;
 
         Component titleComponent = (title.equals("none")) ?
-                Component.empty() : MiniMessage.miniMessage().deserialize(title);
+                Component.empty() : MiniMessage.miniMessage().deserialize(PlaceholderAPI.setPlaceholders(player, title));
 
         Component subtitleComponent = (subtitle.equals("none")) ?
-                Component.empty() : MiniMessage.miniMessage().deserialize(subtitle);
+                Component.empty() : MiniMessage.miniMessage().deserialize(PlaceholderAPI.setPlaceholders(player, subtitle));
 
         Title.Times times = Title.Times.times(Duration.ofMillis(fadeIn), Duration.ofMillis(stay), Duration.ofMillis(fadeOut));
 

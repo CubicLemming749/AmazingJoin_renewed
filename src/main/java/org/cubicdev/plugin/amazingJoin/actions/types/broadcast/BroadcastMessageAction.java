@@ -1,5 +1,6 @@
 package org.cubicdev.plugin.amazingJoin.actions.types.broadcast;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -16,7 +17,7 @@ public class BroadcastMessageAction extends Action {
 
     @Override
     public void execute(Player player, String args) {
-        Component message = MiniMessage.miniMessage().deserialize(args, Placeholder.parsed("player", player.getName()));
+        Component message = MiniMessage.miniMessage().deserialize(PlaceholderAPI.setPlaceholders(player, args), Placeholder.parsed("player", player.getName()));
         Bukkit.broadcast(message);
     }
 }

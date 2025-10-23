@@ -1,5 +1,6 @@
 package org.cubicdev.plugin.amazingJoin.actions.types.player;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
@@ -14,7 +15,7 @@ public class ActionbarAction extends Action {
 
     @Override
     public void execute(Player player, String args) {
-        Component component = MiniMessage.miniMessage().deserialize(args);
+        Component component = MiniMessage.miniMessage().deserialize(PlaceholderAPI.setPlaceholders(player, args));
         player.sendActionBar(component);
     }
 }

@@ -20,5 +20,7 @@ public class SoundAction extends Action {
         float pitch = Float.parseFloat(parameters[2]);
 
         player.playSound(player.getLocation(), Sound.valueOf(soundName), volume, pitch);
+
+        //example: ENTITY_ENDER_DRAGON_GROWL;1;1
     }
 }

@@ -1,5 +1,5 @@
 config:
-  debug: true
+  debug: false
   hooks:
     authme: false
     nlogin: false

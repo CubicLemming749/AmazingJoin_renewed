@@ -1,15 +1,22 @@
-#This are sample configurations, you can remove/edit them freely.
-#Visit the wiki to know how to create your own formats.
+# AmazingJoin Formats Configuration File
+# Version: 1.0.0
+#
+# Thanks for using AmazingJoin!
+#
+# !!!USEFUL INFO!!!
+# Wiki url: https://cubicdev.gitbook.io/amazingjoin
+# Modrinth url: https://modrinth.com/project/amazingjoin
 formats:
   owner:
     permission: ajoin.owner
     join-actions:
       - "broadcast;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> <white>The owner <color:#DEAE2F><player></color> joined the server!"
       - "message;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> Welcome to the server!"
-      - "sound;ENTITY_ENDER_DRAGON_GROWL;1;1"
+      - "broadcast_sound;ENTITY_ENDER_DRAGON_GROWL;1;1"
       - "title;<color:#FA7C64><b>WELCOME OWNER;none;30;20;30"
     leave-actions:
       - "broadcast;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> <white>The owner <color:#DEAE2F><player></color> left the server."
+      - "broadcast_sound;ENTITY_ENDER_DRAGON_GROWL;1;1"
   default:
     permission: default
     join-actions:

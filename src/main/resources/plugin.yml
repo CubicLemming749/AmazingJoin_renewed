@@ -1,6 +1,6 @@
 name: AmazingJoin
 version: '1.0.0'
-main: org.cubicdev.plugin.amazingJoin.AmazingJoin
+main: org.cubicdev.plugin.amazingjoin.AmazingJoin
 api-version: '1.21'
 prefix: AmazingJoin
 softdepend: ["PlaceholderAPI", "AuthMe", "nLogin"]

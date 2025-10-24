@@ -1,3 +1,15 @@
+# AmazingJoin Main Configuration File
+# Version: 1.0.0
+#
+# Thanks for using AmazingJoin!
+#
+# !!!USEFUL INFO!!!
+# Wiki url: https://cubicdev.gitbook.io/amazingjoin
+# Modrinth url: https://modrinth.com/project/amazingjoin
+#
+# This configuration's keys will be restored by themselves if deleted.
+# If new configuration keys are added in updates, they will be added automatically here
+# when updating the jar file and starting the server.
 config:
   debug: false
   hooks:
@@ -26,8 +38,8 @@ config:
       - ""
       - "<dark_gray>• <color:#1BCC91>/amazingjoin help <dark_gray>‣ <white>Shows this message."
       - ""
-      - ""
       - "<gray><italic>Need more help?"
-      - "<dark_gray>• <white>Wiki: <yellow>"
+      - "<dark_gray>• <white>Wiki: <yellow>https://cubicdev.gitbook.io/amazingjoin"
       - "<dark_gray>• <white>Discord user: <yellow>elsus1719"
       - ""
+    new_version_message: "<prefix> <green>A new version of AmazingJoin has been released! Download the new version <gold><version></gold> in <gold>https://modrinth.com/plugin/amazingjoin</gold>."

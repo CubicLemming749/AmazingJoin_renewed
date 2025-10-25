@@ -20,8 +20,8 @@ formats:
   default:
     permission: default
     join-actions:
-      - "condition;%player_has_played_before%=yes;broadcast;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> <white>The user <color:#DEAE2F><player></color> joined the server."
-      - "condition;%player_has_played_before%=no;broadcast;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> <white>The user <color:#DEAE2F><player></color> joined the server for the first time! He is the <color:#DEAE2F>#%server_unique_joins%</color>."
+      - "conditional;%player_has_played_before%=yes;broadcast;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> <white>The user <color:#DEAE2F><player></color> joined the server."
+      - "conditional;%player_has_played_before%=no;broadcast;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> <white>The user <color:#DEAE2F><player></color> joined the server for the first time! He is the <color:#DEAE2F>#%server_unique_joins%</color>."
       - "message;<color:#EDC966><b>AMAZINGMC</color> <gray>|</gray> Welcome to the server!"
       - "sound;BLOCK_NOTE_BLOCK_PLING;1;0.75"
       - "title;<color:#FA7C64><b>WELCOME TO;<gold><b>AMAZINGMC;30;20;30"

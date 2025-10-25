@@ -28,7 +28,7 @@ public class ActionSerializer {
         }
 
         for(String action : actions){
-            String[] args = action.split(";", 4);
+            String[] args = action.split(";");
 
             String actionType = args[0];
             String parameter = String.join(";", Arrays.copyOfRange(args, 1, args.length));
@@ -42,14 +42,14 @@ public class ActionSerializer {
     private Action getAction(String actionType, String parameter){
 
         switch (actionType){
-            case "condition" -> {
+            case "conditional" -> {
                 String conditionAction = parameter.split(";")[1];
                 return new ConditionAction(main, getAction(conditionAction, null));
             }
 
             case "prelogin" -> {
-                String action = parameter.split(";")[1];
-                return new PreloginAction(main, getAction(action, null));
+                String action = parameter.split(";")[0];
+                return new PreloginAction(main, getAction(action, String.join(";", Arrays.copyOfRange(parameter.split(";"), 1, parameter.split(";").length))));
             }
 
             case "message" -> {

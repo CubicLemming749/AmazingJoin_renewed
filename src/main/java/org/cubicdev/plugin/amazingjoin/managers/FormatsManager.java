@@ -14,6 +14,7 @@ import org.cubicdev.plugin.amazingjoin.formats.Format;
 import org.cubicdev.plugin.amazingjoin.formats.FormatSerializer;
 import org.cubicdev.plugin.amazingjoin.utils.Utils;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,13 +71,14 @@ public class FormatsManager {
             if(action instanceof PreloginAction) continue;
 
             if(action instanceof ConditionAction condition){
-                boolean result = condition.check(player, entry.getValue().split(";")[0]);
+                String[] temporal = entry.getValue().split(";");
+                boolean result = condition.check(player, temporal[0]);
 
                 if(!result){
-                    Utils.sendDebug("Condition '"+entry.getValue().split(";")[0]+"' failed to player "+player.getName());
+                    Utils.sendDebug("Condition '"+temporal[0]+"' failed to player "+player.getName());
                     continue;
                 }else{
-                    condition.execute(player, entry.getValue().split(";")[2]);;
+                    condition.execute(player, String.join(";", Arrays.copyOfRange(temporal, 2, temporal.length)));;
                     action.log(player, entry.getValue());
                 }
 
@@ -102,21 +104,24 @@ public class FormatsManager {
             preloginAction = (PreloginAction) action;
 
             if(preloginAction.getAction() instanceof ConditionAction condition){
-                boolean result = condition.check(player, entry.getValue().split(";")[0]);
+                String[] temporal = entry.getValue().split(";");
+                boolean result = condition.check(player, temporal[1]);
 
                 if(!result){
-                    Utils.sendDebug("Condition '"+entry.getValue().split(";")[0]+"' failed to player "+player.getName());
+                    Utils.sendDebug("Condition '"+temporal[1]+"' failed to player "+player.getName());
                     continue;
                 }else{
-                    condition.execute(player, entry.getValue().split(";")[2]);;
-                    action.log(player, entry.getValue());
+                    condition.execute(player, String.join(";", Arrays.copyOfRange(temporal, 3, temporal.length)));;
+                    action.log(player, String.join(";", temporal));
                 }
 
                 continue;
             }
+            String[] temporal = entry.getValue().split(";");
+            String parameters = String.join(";", Arrays.copyOfRange(temporal, 1, temporal.length));
 
-            preloginAction.execute(player, entry.getValue());
-            preloginAction.log(player, entry.getValue());
+            preloginAction.execute(player, parameters);
+            preloginAction.log(player, parameters);
         }
     }
 

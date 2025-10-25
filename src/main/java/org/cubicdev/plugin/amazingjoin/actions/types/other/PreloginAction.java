@@ -13,7 +13,7 @@ public class PreloginAction extends Action {
     private Action action;
 
     public PreloginAction(AmazingJoin main, Action action) {
-        super(main, "condition");
+        super(main, "prelogin");
         this.action = action;
     }
 

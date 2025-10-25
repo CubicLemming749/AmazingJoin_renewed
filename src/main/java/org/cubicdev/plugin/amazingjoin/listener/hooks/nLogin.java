@@ -30,7 +30,7 @@ public class nLogin implements Listener {
         this.yamlConfiguration = configsManager.findConfig("formats.yml").getYamlConfiguration();
         Player player = e.getPlayer();
 
-        if(player.hasPermission("amazingjoin.notify.updates") || UpdateChecker.IS_NEW_VERSION){
+        if(player.hasPermission("amazingjoin.notify.updates") && UpdateChecker.IS_NEW_VERSION){
             Utils.sendParsedMessage(player, configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.new_version_message").replace("<version>", UpdateChecker.NEW_VERSION));
         }
 

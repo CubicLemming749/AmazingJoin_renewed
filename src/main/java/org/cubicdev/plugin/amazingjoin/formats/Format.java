@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2025 CubicLemming749
+ * Licensed under the MIT License.
+ */
+
 package org.cubicdev.plugin.amazingjoin.formats;
 
 import org.cubicdev.plugin.amazingjoin.actions.Action;

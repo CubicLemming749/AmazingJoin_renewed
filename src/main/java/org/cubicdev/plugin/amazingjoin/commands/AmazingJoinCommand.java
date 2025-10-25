@@ -1,9 +1,10 @@
+package org.cubicdev.plugin.amazingjoin.commands;
+
 /*
  * Copyright (c) 2025 CubicLemming749
  * Licensed under the MIT License.
  */
 
-package org.cubicdev.plugin.amazingjoin.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;

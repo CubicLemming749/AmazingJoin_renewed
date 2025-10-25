@@ -1,9 +1,9 @@
+package org.cubicdev.plugin.amazingjoin.formats;
+
 /*
  * Copyright (c) 2025 CubicLemming749
  * Licensed under the MIT License.
  */
-
-package org.cubicdev.plugin.amazingjoin.formats;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;

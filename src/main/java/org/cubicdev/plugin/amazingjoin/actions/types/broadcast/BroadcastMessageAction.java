@@ -1,9 +1,9 @@
+package org.cubicdev.plugin.amazingjoin.actions.types.broadcast;
+
 /*
  * Copyright (c) 2025 CubicLemming749
  * Licensed under the MIT License.
  */
-
-package org.cubicdev.plugin.amazingjoin.actions.types.broadcast;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;

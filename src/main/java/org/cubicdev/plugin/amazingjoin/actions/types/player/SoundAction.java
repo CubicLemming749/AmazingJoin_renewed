@@ -1,5 +1,10 @@
 package org.cubicdev.plugin.amazingjoin.actions.types.player;
 
+/*
+ * Copyright (c) 2025 CubicLemming749
+ * Licensed under the MIT License.
+ */
+
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.cubicdev.plugin.amazingjoin.AmazingJoin;

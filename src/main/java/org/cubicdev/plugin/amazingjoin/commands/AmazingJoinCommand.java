@@ -76,7 +76,7 @@ public class AmazingJoinCommand {
                                 .then(Commands.literal("join")
                                         .executes(ctx -> this.testAction(ctx, ActionType.JOIN)))
                                 .then(Commands.literal("leave")
-                                        .executes(ctx -> this.testAction(ctx, ActionType.LEAVE))
+                                        .executes(ctx -> this.testAction(ctx, ActionType.LEAVE)))
                 )
 
                 .then(Commands.literal("addaction")
@@ -110,6 +110,7 @@ public class AmazingJoinCommand {
                             return Command.SINGLE_SUCCESS;
                         })
                 )
+
                 .then(Commands.literal("reload")
                         .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.reload"))
                         .executes(commandContext -> {
@@ -122,7 +123,7 @@ public class AmazingJoinCommand {
 
                             Utils.sendParsedMessage(commandContext.getSource().getSender(), config.getString("config.language.reload_success"));
                             return Command.SINGLE_SUCCESS;
-                }))));
+                })));
 
         LiteralCommandNode<CommandSourceStack> command = root.build();
 
@@ -148,6 +149,7 @@ public class AmazingJoinCommand {
 
         Utils.sendParsedMessage(player, mainConfig.getString("config.language.format_testing_success"));
         formatsManager.executeActions(player, formatToTest, type);
+        formatsManager.executePreLoginActions(player, formatToTest);
         return Command.SINGLE_SUCCESS;
     }
 

@@ -1,3 +1,5 @@
+package org.cubicdev.plugin.amazingjoin;
+
 /*
     MIT License
 
@@ -21,8 +23,6 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
 */
-
-package org.cubicdev.plugin.amazingjoin;
 
 import org.bstats.bukkit.Metrics;
 import org.bukkit.configuration.file.YamlConfiguration;

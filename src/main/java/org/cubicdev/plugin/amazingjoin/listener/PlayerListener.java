@@ -1,9 +1,9 @@
+package org.cubicdev.plugin.amazingjoin.listener;
+
 /*
  * Copyright (c) 2025 CubicLemming749
  * Licensed under the MIT License.
  */
-
-package org.cubicdev.plugin.amazingjoin.listener;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;

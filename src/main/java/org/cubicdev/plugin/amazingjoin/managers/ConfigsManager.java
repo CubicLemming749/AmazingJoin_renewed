@@ -1,9 +1,10 @@
+package org.cubicdev.plugin.amazingjoin.managers;
+
 /*
  * Copyright (c) 2025 CubicLemming749
  * Licensed under the MIT License.
  */
 
-package org.cubicdev.plugin.amazingjoin.managers;
 
 import org.cubicdev.plugin.amazingjoin.config.Config;
 

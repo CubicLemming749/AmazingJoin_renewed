@@ -1,9 +1,9 @@
+package org.cubicdev.plugin.amazingjoin.actions.conditions;
+
 /*
  * Copyright (c) 2025 CubicLemming749
  * Licensed under the MIT License.
  */
-
-package org.cubicdev.plugin.amazingjoin.actions.conditions;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;

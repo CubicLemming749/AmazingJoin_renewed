@@ -57,7 +57,7 @@ public class FormatsManager {
     public void executeActions(Player player, Format format, ActionType actionType){
         HashMap<Action, String> actionsMap = new HashMap<>();
 
-        if(actionType == ActionType.ENTER){
+        if(actionType == ActionType.JOIN){
              actionsMap = format.getJoinActionsMap();
         }
 

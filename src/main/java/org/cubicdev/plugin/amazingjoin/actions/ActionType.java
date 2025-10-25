@@ -6,6 +6,16 @@ package org.cubicdev.plugin.amazingjoin.actions;
  */
 
 public enum ActionType {
-    ENTER,
-    LEAVE
+    JOIN("join"),
+    LEAVE("leave");
+
+    private final String name;
+
+    ActionType(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
 }

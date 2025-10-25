@@ -45,7 +45,7 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        formatsManager.executeActions(player, playerFormat, ActionType.ENTER);
+        formatsManager.executeActions(player, playerFormat, ActionType.JOIN);
     }
 
     @EventHandler

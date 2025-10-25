@@ -48,22 +48,23 @@ public class AmazingJoinCommand {
     public void setupCommand(){
         LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("amazingjoin")
                 .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command"))
-                .then(Commands.literal("create").
-                        requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.create")).
-                        then(Commands.argument("name", StringArgumentType.word()).
-                                then(Commands.argument("permission", StringArgumentType.greedyString())
+                .then(Commands.literal("create")
+                        .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.create"))
+                        .then(Commands.argument("name", StringArgumentType.word())
+                                .then(Commands.argument("permission", StringArgumentType.greedyString())
                                         .executes(ctx -> {
+                                            YamlConfiguration config = configsManager.findConfig("config.yml").getYamlConfiguration();
                                             String newFormatName = ctx.getArgument("name", String.class);
                                             String newFormatPermission = ctx.getArgument("permission", String.class);
 
                                             boolean successful = formatsManager.createFormat(newFormatName, newFormatPermission);
 
                                             if(!successful){
-                                                Utils.sendParsedMessage(ctx.getSource().getSender(), configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.format_cannot_be_created"));
+                                                Utils.sendParsedMessage(ctx.getSource().getSender(), config.getString("config.language.format_cannot_be_created"));
                                                 return 0;
                                             }
 
-                                            Utils.sendParsedMessage(ctx.getSource().getSender(), configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.format_created").replace("<name>", newFormatName));
+                                            Utils.sendParsedMessage(ctx.getSource().getSender(), config.getString("config.language.format_created").replace("<name>", newFormatName));
                                             return Command.SINGLE_SUCCESS;
                                         })))
                 )
@@ -72,44 +73,10 @@ public class AmazingJoinCommand {
                         .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.test"))
                         .then(Commands.argument("format", StringArgumentType.word())
                                 .suggests(this::getSuggestions)
-                                .then(Commands.literal("join").
-                                        executes(ctx -> {
-                                            CommandSender sender = ctx.getSource().getSender();
-                                            String formatName = ctx.getArgument("format", String.class);
-                                            Format formatToTest = formatsManager.findFormat(formatName);
-
-                                            if(!(sender instanceof Player player)){
-                                                return 0;
-                                            }
-
-                                            if(formatToTest == null){
-                                                Utils.sendParsedMessage(player, configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.format_not_found"));
-                                                return 0;
-                                            }
-
-                                            Utils.sendParsedMessage(player, configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.format_testing_success"));
-                                            formatsManager.executeActions(player, formatToTest, ActionType.ENTER);
-                                            return Command.SINGLE_SUCCESS;
-                                        }))
+                                .then(Commands.literal("join")
+                                        .executes(ctx -> this.testAction(ctx, ActionType.JOIN)))
                                 .then(Commands.literal("leave")
-                                        .executes(ctx -> {
-                                            CommandSender sender = ctx.getSource().getSender();
-                                            String formatName = ctx.getArgument("format", String.class);
-                                            Format formatToTest = formatsManager.findFormat(formatName);
-
-                                            if(!(sender instanceof Player player)){
-                                                return 0;
-                                            }
-
-                                            if(formatToTest == null){
-                                                Utils.sendParsedMessage(player, configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.format_not_found"));
-                                                return 0;
-                                            }
-
-                                            Utils.sendParsedMessage(player, configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.format_testing_success"));
-                                            formatsManager.executeActions(player, formatToTest, ActionType.LEAVE);
-                                            return Command.SINGLE_SUCCESS;
-                                        })))
+                                        .executes(ctx -> this.testAction(ctx, ActionType.LEAVE))
                 )
 
                 .then(Commands.literal("addaction")
@@ -125,7 +92,7 @@ public class AmazingJoinCommand {
                                             return suggestionsBuilder.buildFuture();
                                         })
                                         .then(Commands.argument("action", StringArgumentType.greedyString())
-                                                .executes(ctx -> addAction(ctx, ctx.getArgument("type", String.class))))))
+                                                .executes(ctx -> addAction(ctx, ActionType.valueOf(ctx.getArgument("type", String.class)))))))
                 )
 
                 .then(Commands.literal("help")
@@ -146,15 +113,16 @@ public class AmazingJoinCommand {
                 .then(Commands.literal("reload")
                         .requires(executor -> executor.getExecutor() == null || executor.getExecutor().hasPermission("amazingjoin.command.reload"))
                         .executes(commandContext -> {
+                            YamlConfiguration config = configsManager.findConfig("config.yml").getYamlConfiguration();
                             configsManager.reloadConfigs();
                             formatsManager.reloadFormats();
                             defaults.setMainConfigDefaults(configsManager.findConfig("config.yml"));
 
                             new Utils(configsManager);
 
-                            Utils.sendParsedMessage(commandContext.getSource().getSender(), configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.reload_success"));
+                            Utils.sendParsedMessage(commandContext.getSource().getSender(), config.getString("config.language.reload_success"));
                             return Command.SINGLE_SUCCESS;
-                }));
+                }))));
 
         LiteralCommandNode<CommandSourceStack> command = root.build();
 
@@ -163,10 +131,32 @@ public class AmazingJoinCommand {
         });
     }
 
-    public int addAction(CommandContext<CommandSourceStack> ctx, String type){
+    public int testAction(CommandContext<CommandSourceStack> ctx, ActionType type){
+        YamlConfiguration mainConfig = configsManager.findConfig("config.yml").getYamlConfiguration();
+        CommandSender sender = ctx.getSource().getSender();
+        String formatName = ctx.getArgument("format", String.class);
+        Format formatToTest = formatsManager.findFormat(formatName);
+
+        if(!(sender instanceof Player player)){
+            return 0;
+        }
+
+        if(formatToTest == null){
+            Utils.sendParsedMessage(player, mainConfig.getString("config.language.format_not_found"));
+            return 0;
+        }
+
+        Utils.sendParsedMessage(player, mainConfig.getString("config.language.format_testing_success"));
+        formatsManager.executeActions(player, formatToTest, type);
+        return Command.SINGLE_SUCCESS;
+    }
+
+    public int addAction(CommandContext<CommandSourceStack> ctx, ActionType type){
         YamlConfiguration yamlConfiguration = configsManager.findConfig("formats.yml").getYamlConfiguration();
         String action = ctx.getArgument("action", String.class);
         String formatName = ctx.getArgument("format", String.class);
+
+        String typeName = type.getName();
 
         if(!yamlConfiguration.isConfigurationSection("formats."+formatName)){
             Utils.sendParsedMessage(ctx.getSource().getSender(), configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.format_doesnt_exist"));
@@ -175,7 +165,7 @@ public class AmazingJoinCommand {
 
         String formatPath = "formats."+formatName;
 
-        if(type.equals("join")){
+        if(typeName.equals("join")){
             List<String> joinActions = yamlConfiguration.getStringList(formatPath+".join-actions");
             joinActions.add(action);
 
@@ -189,7 +179,7 @@ public class AmazingJoinCommand {
             return Command.SINGLE_SUCCESS;
         }
 
-        if (type.equals("leave")) {
+        if (typeName.equals("leave")) {
             List<String> leaveActions =  yamlConfiguration.getStringList(formatPath+".leave-actions");
             leaveActions.add(action);
 
@@ -199,7 +189,7 @@ public class AmazingJoinCommand {
 
             configsManager.reloadConfigs();
 
-            Utils.sendParsedMessage(ctx.getSource().getSender(), yamlConfiguration.getString("config.language.format_action_added"));
+            Utils.sendParsedMessage(ctx.getSource().getSender(), configsManager.findConfig("config.yml").getYamlConfiguration().getString("config.language.format_action_added"));
         }
 
         return Command.SINGLE_SUCCESS;

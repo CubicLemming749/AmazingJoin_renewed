@@ -76,7 +76,7 @@ public class AmazingJoinCommand {
                                 .then(Commands.literal("join")
                                         .executes(ctx -> this.testAction(ctx, ActionType.JOIN)))
                                 .then(Commands.literal("leave")
-                                        .executes(ctx -> this.testAction(ctx, ActionType.LEAVE)))
+                                        .executes(ctx -> this.testAction(ctx, ActionType.LEAVE))))
                 )
 
                 .then(Commands.literal("addaction")
@@ -123,7 +123,7 @@ public class AmazingJoinCommand {
 
                             Utils.sendParsedMessage(commandContext.getSource().getSender(), config.getString("config.language.reload_success"));
                             return Command.SINGLE_SUCCESS;
-                })));
+                }));
 
         LiteralCommandNode<CommandSourceStack> command = root.build();
 
